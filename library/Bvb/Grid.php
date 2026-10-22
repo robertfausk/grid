@@ -1881,12 +1881,12 @@ abstract class Bvb_Grid {
      */
     protected function _prepareReplace($fields) {
         // Make an array of field names in format {{$fieldname}}
-        $map = array_map(create_function('$value', 'return "{{{$value}}}";'), $fields);
+        $map = array_map(function ($value) { return "{{{$value}}}"; }, $fields);
         if (isset($this->_options['grid']['enableUnmodifiedFieldPlaceholders'])
                 && $this->_options['grid']['enableUnmodifiedFieldPlaceholders'] == true
         ) {
             // Enable placeholders for unmodified fields: Make an array of field names in format {{=$fieldname}}
-            $map2 = array_map(create_function('$value', 'return "{{={$value}}}";'), $fields);
+            $map2 = array_map(function ($value) { return "{{={$value}}}"; }, $fields);
             $map = array_merge($map, $map2);
         }
         return $map;
@@ -2294,7 +2294,7 @@ abstract class Bvb_Grid {
                 foreach ($this->_classRowCondition as $value)
                 {
                     $cond = str_replace($search, $replace, $value['condition']);
-                    $final = call_user_func(create_function('', "if($cond){return true;}else{return false;}"));
+                    $final = eval("return ($cond) ? true : false;");
                     $this->_classRowConditionResult[$i] .= $final == true ? $value['class'] . ' ' : $value['else'] . ' ';
                 }
             }
@@ -2307,7 +2307,7 @@ abstract class Bvb_Grid {
                     foreach ($value as $condF)
                     {
                         $cond = str_replace($search, $replace, $condF['condition']);
-                        $final = call_user_func(create_function('', "if($cond){return true;}else{return false;}"));
+                        $final = eval("return ($cond) ? true : false;");
                         $classConditional[$key] .= $final == true ? $condF['class'] . ' ' : $condF['else'] . ' ';
                     }
                 }
