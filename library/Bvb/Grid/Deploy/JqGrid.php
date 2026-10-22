@@ -449,6 +449,12 @@ JS;
      *
      * @return Bvb_Grid_Deploy_JqGrid
      */
+    public function addPostCommand($command)
+    {
+        $this->_postCommands[] = $command;
+        return $this;
+    }
+
     public function deploy()
     {
         // check if setAjax() function was called
