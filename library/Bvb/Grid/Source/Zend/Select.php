@@ -1215,7 +1215,7 @@ class Bvb_Grid_Source_Zend_Select extends Bvb_Grid_Source_Db_DbAbstract implemen
         }
         $cols = $this->getDescribeTable($table['table'], $table['schema']);
 
-        return $this->buildFormElements($cols, array(), $inputsType, array());
+        return $this->buildFormElements($cols, array(), array(), $inputsType);
     }
 
     /**
@@ -1227,7 +1227,7 @@ class Bvb_Grid_Source_Zend_Select extends Bvb_Grid_Source_Db_DbAbstract implemen
      *
      * @return Bvb_Grid_Source_Zend_Select
      */
-    public function buildFormElements($cols, $info = array(), $inputsType = array(),$relationMap)
+    public function buildFormElements($cols, $relationMap, $info = array(), $inputsType = array())
     {
         $final = array();
         $form = array();

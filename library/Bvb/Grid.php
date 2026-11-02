@@ -842,7 +842,7 @@ abstract class Bvb_Grid {
      *
      * @return Bvb_Grid
      */
-    public function setView(Zend_View_Interface $view = null) {
+    public function setView(?Zend_View_Interface $view = null) {
         $this->_view = $view;
         return $this;
     }
